@@ -57,6 +57,14 @@ body {
   transition: 0.3s ease;
 }
 
+.session-number {
+  color: #e3f6f5;
+  border: 2px solid transparent;
+  padding: 1rem;
+  border-radius: 2rem;
+  font-size: 24px;
+}
+
 .show-message {
   display: block;
   padding: 1rem 0;

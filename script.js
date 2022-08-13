@@ -7,6 +7,7 @@ let secondsBreak = "00";
 let click = new Audio("click.mp3");
 let bell = new Audio("bell.mp3");
 
+let sessionCounter = 0;
 
 function template() {
     document.getElementById("minutes").innerHTML = minutes;
@@ -14,12 +15,16 @@ function template() {
 
     document.getElementById("minutesBreak").innerHTML = minutesBreak;
     document.getElementById("secondsBreak").innerHTML = secondsBreak;
+
+    document.getElementById("sessionCounter").innerHTML = sessionCounter;
 }
 
 function start() {
     click.play();
+    //fazer o som apenas quando pegar o evento de click e não quando reiniciar a função.
 
     document.body.classList.remove("backBreak");
+    document.getElementById("start-btn").disabled = true;
 
     minutes = 24;
     seconds = 59;
@@ -39,8 +44,8 @@ function start() {
         seconds = seconds - 1;
         document.getElementById("seconds").innerHTML = seconds;
 
-        if(seconds <= 0) {
-            if(minutes <= 0) {
+        if(seconds <= 53) {
+            if(minutes <= 24) {
                 clearInterval(minutes_interval);
                 clearInterval(seconds_interval);
 
@@ -48,12 +53,16 @@ function start() {
 
                 document.getElementById("done").classList.add("show-message");
 
+                sessionCounter++;
+                document.getElementById("sessionCounter").innerHTML = sessionCounter;
+
                 bell.play();
 
                 startBreak();
+
             }
             seconds = 60;
-        }
+        } 
     }
 }
 
@@ -80,8 +89,8 @@ function startBreak() {
         secondsBreak = secondsBreak - 1;
         document.getElementById("secondsBreak").innerHTML = secondsBreak;
 
-        if(secondsBreak <= 0) {
-            if(minutesBreak <= 0) {
+        if(secondsBreak <= 53) {
+            if(minutesBreak <= 4) {
                 clearInterval(minutesBreak_interval);
                 clearInterval(secondsBreak_interval);
 
